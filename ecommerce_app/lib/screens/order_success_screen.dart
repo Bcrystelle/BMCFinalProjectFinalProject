@@ -7,9 +7,11 @@ class OrderSuccessScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.purple[50], // light purple background
       appBar: AppBar(
         title: const Text('Order Placed!'),
         automaticallyImplyLeading: false,
+        backgroundColor: Colors.purple[300], // light purple AppBar
       ),
       body: Center(
         child: Padding(
@@ -37,6 +39,7 @@ class OrderSuccessScreen extends StatelessWidget {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size.fromHeight(50),
+                  backgroundColor: Colors.purple[300], // light purple button
                 ),
                 onPressed: () {
                   Navigator.of(context).pushAndRemoveUntil(

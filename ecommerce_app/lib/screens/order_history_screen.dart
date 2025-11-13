@@ -11,12 +11,17 @@ class OrderHistoryScreen extends StatelessWidget {
     final User? user = FirebaseAuth.instance.currentUser;
 
     return Scaffold(
+      backgroundColor: Colors.purple[50], // light purple background
       appBar: AppBar(
         title: const Text('My Orders'),
+        backgroundColor: Colors.purple[300], // light purple AppBar
       ),
       body: user == null
           ? const Center(
-              child: Text('Please log in to see your orders.'),
+              child: Text(
+                'Please log in to see your orders.',
+                style: TextStyle(color: Colors.purple), // light purple text
+              ),
             )
           : StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
@@ -26,16 +31,28 @@ class OrderHistoryScreen extends StatelessWidget {
                   .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      color: Colors.purple, // light purple spinner
+                    ),
+                  );
                 }
 
                 if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
+                  return Center(
+                    child: Text(
+                      'Error: ${snapshot.error}',
+                      style: const TextStyle(color: Colors.purple),
+                    ),
+                  );
                 }
 
                 if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
                   return const Center(
-                    child: Text('You have not placed any orders yet.'),
+                    child: Text(
+                      'You have not placed any orders yet.',
+                      style: TextStyle(color: Colors.purple),
+                    ),
                   );
                 }
 

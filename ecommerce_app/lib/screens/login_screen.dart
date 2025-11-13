@@ -50,7 +50,11 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
+      backgroundColor: Colors.purple[50], // light purple background
+      appBar: AppBar(
+        title: const Text('Login'),
+        backgroundColor: Colors.purple[300], // light purple AppBar
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -61,8 +65,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 40),
                 TextFormField(
                   controller: _emailController,
-                  decoration: const InputDecoration(
-                      labelText: 'Email', border: OutlineInputBorder()),
+                  decoration: InputDecoration(
+                    labelText: 'Email',
+                    border: const OutlineInputBorder(),
+                    filled: true,
+                    fillColor: Colors.purple[100], // light purple field
+                  ),
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
                     if (value == null || value.isEmpty) return 'Enter email';
@@ -74,8 +82,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 TextFormField(
                   controller: _passwordController,
                   obscureText: true,
-                  decoration: const InputDecoration(
-                      labelText: 'Password', border: OutlineInputBorder()),
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    border: const OutlineInputBorder(),
+                    filled: true,
+                    fillColor: Colors.purple[100], // light purple field
+                  ),
                   validator: (value) {
                     if (value == null || value.isEmpty) return 'Enter password';
                     if (value.length < 6) return 'Password must be at least 6 characters';
@@ -85,7 +97,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: _isLoading ? null : _login,
-                  style: ElevatedButton.styleFrom(minimumSize: const Size.fromHeight(50)),
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size.fromHeight(50),
+                    backgroundColor: Colors.purple[300], // light purple button
+                  ),
                   child: _isLoading
                       ? const CircularProgressIndicator(
                           valueColor: AlwaysStoppedAnimation<Color>(Colors.white))
@@ -97,7 +112,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       MaterialPageRoute(builder: (context) => const SignUpScreen()),
                     );
                   },
-                  child: const Text("Don't have an account? Sign Up"),
+                  child: const Text(
+                    "Don't have an account? Sign Up",
+                    style: TextStyle(color: Colors.purple), // light purple text
+                  ),
                 )
               ],
             ),

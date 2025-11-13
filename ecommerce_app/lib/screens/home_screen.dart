@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
+
+// Screens
 import 'package:ecommerce_app/screens/admin_panel_screen.dart';
-import 'package:ecommerce_app/widgets/product_card.dart';
 import 'package:ecommerce_app/screens/product_detail_screen.dart';
-import 'package:ecommerce_app/providers/cart_provider.dart';
 import 'package:ecommerce_app/screens/cart_screen.dart';
 import 'package:ecommerce_app/screens/order_history_screen.dart';
-import 'package:provider/provider.dart';
+import 'package:ecommerce_app/screens/profile_screen.dart';
+import 'package:ecommerce_app/screens/login_screen.dart';
+import 'package:ecommerce_app/screens/chat_screen.dart';
+
+// Widgets & Providers
+import 'package:ecommerce_app/widgets/product_card.dart';
+import 'package:ecommerce_app/widgets/notification_icon.dart';
+import 'package:ecommerce_app/providers/cart_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -18,116 +26,129 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String _userRole = 'user';
-  final User? _currentUser = FirebaseAuth.instance.currentUser;
+  User? _currentUser = FirebaseAuth.instance.currentUser;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   void initState() {
     super.initState();
+    _listenToAuthChanges();
     _fetchUserRole();
+  }
+
+  void _listenToAuthChanges() {
+    FirebaseAuth.instance.authStateChanges().listen((user) {
+      if (mounted) setState(() => _currentUser = user);
+      if (user == null && mounted) {
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => const LoginScreen()),
+          (route) => false,
+        );
+      }
+    });
   }
 
   Future<void> _fetchUserRole() async {
     if (_currentUser == null) return;
-
     try {
-      final doc = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(_currentUser!.uid)
-          .get();
-
+      final doc =
+          await _firestore.collection('users').doc(_currentUser!.uid).get();
       if (doc.exists && doc.data() != null) {
-        setState(() {
-          _userRole = doc.data()!['role'] ?? 'user';
-        });
+        setState(() => _userRole = doc.data()!['role'] ?? 'user');
       }
     } catch (e) {
       debugPrint('Error fetching user role: $e');
     }
   }
 
-  Future<void> _signOut() async {
-    try {
-      await FirebaseAuth.instance.signOut();
-    } catch (e) {
-      debugPrint('Error signing out: $e');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    if (_currentUser == null) return const LoginScreen();
+
     return Scaffold(
+      backgroundColor: Colors.purple[50], // light purple background
       appBar: AppBar(
-        title: Text(
-          _currentUser != null ? 'Welcome, ${_currentUser!.email}' : 'Home',
+        title: Image.asset(
+          'assets/images/app_logo.png',
+          height: 40,
         ),
+        centerTitle: true,
+        backgroundColor: Colors.purple[300], // light purple AppBar
         actions: [
+          // 🛒 Cart Icon with Badge
           Consumer<CartProvider>(
             builder: (context, cart, child) {
               return Badge(
-                label: Text(cart.itemCount.toString()),
+                label: Text(
+                  cart.itemCount.toString(),
+                  style: const TextStyle(fontSize: 10, color: Colors.white),
+                ),
                 isLabelVisible: cart.itemCount > 0,
                 child: IconButton(
                   icon: const Icon(Icons.shopping_cart),
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const CartScreen(),
-                      ),
-                    );
-                  },
+                  onPressed: () => Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const CartScreen()),
+                  ),
                 ),
               );
             },
           ),
+
+          // 🔔 Notification Icon
+          const NotificationIcon(),
+
+          // 📜 Order History
           IconButton(
             icon: const Icon(Icons.receipt_long),
             tooltip: 'My Orders',
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const OrderHistoryScreen(),
-                ),
-              );
-            },
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const OrderHistoryScreen()),
+            ),
           ),
+
+          // 🛠️ Admin Panel (only for admin users)
           if (_userRole == 'admin')
             IconButton(
               icon: const Icon(Icons.admin_panel_settings),
               tooltip: 'Admin Panel',
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const AdminPanelScreen(),
-                  ),
-                );
-              },
+              onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const AdminPanelScreen()),
+              ),
             ),
+
+          // 👤 Profile
           IconButton(
-            icon: const Icon(Icons.logout),
-            tooltip: 'Logout',
-            onPressed: _signOut,
+            icon: const Icon(Icons.person_outline),
+            tooltip: 'Profile',
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const ProfileScreen()),
+            ),
           ),
         ],
       ),
+
+      // 🛍️ Product Grid
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance
+        stream: _firestore
             .collection('products')
             .orderBy('createdAt', descending: true)
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+              child: CircularProgressIndicator(
+                color: Colors.purple, // light purple spinner
+              ),
+            );
           }
 
-          if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          }
+          if (snapshot.hasError) return Center(child: Text('Error: ${snapshot.error}', style: const TextStyle(color: Colors.purple)));
 
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
             return const Center(
               child: Text(
                 'No products found. Add some in the Admin Panel!',
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 16, color: Colors.purple),
               ),
             );
           }
@@ -145,27 +166,58 @@ class _HomeScreenState extends State<HomeScreen> {
             itemCount: products.length,
             itemBuilder: (context, index) {
               final productDoc = products[index];
-              final productData = productDoc.data() as Map<String, dynamic>;
+              final productData = productDoc.data() as Map<String, dynamic>? ?? {};
 
               return ProductCard(
                 productName: productData['name'] ?? 'Unnamed Product',
                 price: (productData['price'] ?? 0).toDouble(),
                 imageUrl: productData['imageUrl'] ?? '',
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => ProductDetailScreen(
-                        productData: productData,
-                        productId: productDoc.id,
-                      ),
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => ProductDetailScreen(
+                      productData: productData,
+                      productId: productDoc.id,
                     ),
-                  );
-                },
+                  ),
+                ),
               );
             },
           );
         },
       ),
+
+      // 💬 Floating Action Button for users to contact admin
+      floatingActionButton: _userRole == 'user'
+          ? StreamBuilder<DocumentSnapshot>(
+              stream: _firestore
+                  .collection('chats')
+                  .doc(_currentUser!.uid)
+                  .snapshots(),
+              builder: (context, snapshot) {
+                int unreadCount = 0;
+                if (snapshot.hasData && snapshot.data!.exists) {
+                  final data = snapshot.data!.data() as Map<String, dynamic>?;
+                  unreadCount = data?['unreadByUserCount'] ?? 0;
+                }
+                return Badge(
+                  label: Text('$unreadCount'),
+                  isLabelVisible: unreadCount > 0,
+                  child: FloatingActionButton.extended(
+                    backgroundColor: Colors.purple[200], // light purple FAB
+                    foregroundColor: Colors.white,
+                    icon: const Icon(Icons.support_agent),
+                    label: const Text('Contact Admin'),
+                    onPressed: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            ChatScreen(chatRoomId: _currentUser!.uid),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            )
+          : null,
     );
   }
 }
