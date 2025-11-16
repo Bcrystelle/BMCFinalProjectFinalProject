@@ -1,15 +1,9 @@
-// ================================
-// lib/providers/cart_provider.dart
-// ================================
-
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-// ================================
-// CART ITEM MODEL
-// ================================
+
 class CartItem {
   final String id;
   final String name;
@@ -40,9 +34,7 @@ class CartItem {
   }
 }
 
-// ================================
-// CART PROVIDER
-// ================================
+
 class CartProvider with ChangeNotifier {
   List<CartItem> _items = [];
 
@@ -52,9 +44,7 @@ class CartProvider with ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  // ----------------
-  // Getters
-  // ----------------
+
   List<CartItem> get items => _items;
 
   int get itemCount => _items.fold(0, (total, item) => total + item.quantity);
@@ -82,9 +72,7 @@ class CartProvider with ChangeNotifier {
     });
   }
 
-  // ----------------
-  // Fetch Cart from Firestore
-  // ----------------
+
   Future<void> _fetchCart() async {
     if (_userId == null) return;
 
@@ -104,9 +92,7 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  // ----------------
-  // Save Cart to Firestore
-  // ----------------
+
   Future<void> _saveCart() async {
     if (_userId == null) return;
 
@@ -122,9 +108,7 @@ class CartProvider with ChangeNotifier {
     }
   }
 
-  // ----------------
-  // Cart Operations
-  // ----------------
+
   void addItem(String id, String name, double price, int quantity) {
     final index = _items.indexWhere((item) => item.id == id);
 
@@ -149,9 +133,7 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  // ----------------
-  // Place Order
-  // ----------------
+
   Future<void> placeOrder() async {
     if (_userId == null || _items.isEmpty) {
       throw Exception('Cart is empty or user is not logged in.');
@@ -177,9 +159,7 @@ class CartProvider with ChangeNotifier {
     }
   }
 
-  // ----------------
-  // Clear Cart
-  // ----------------
+
   Future<void> clearCart() async {
     _items = [];
 
@@ -196,9 +176,7 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  // ----------------
-  // Cleanup
-  // ----------------
+
   @override
   void dispose() {
     _authSubscription?.cancel();
