@@ -100,10 +100,10 @@ class _ChatScreenState extends State<ChatScreen> {
     final User? currentUser = _auth.currentUser;
 
     return Scaffold(
-      backgroundColor: Colors.purple[50], // light purple background
+      backgroundColor: Colors.purple[50],
       appBar: AppBar(
         title: Text(widget.userName ?? 'Contact Admin'),
-        backgroundColor: Colors.purple[300], // light purple AppBar
+        backgroundColor: Colors.purple[300], 
       ),
       body: Column(
         children: [
@@ -157,7 +157,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     decoration: InputDecoration(
                       hintText: 'Type your message...',
                       filled: true,
-                      fillColor: Colors.purple[100], // light purple input
+                      fillColor: Colors.purple[100], 
                       border: const OutlineInputBorder(),
                     ),
                     onSubmitted: (value) => _sendMessage(),
@@ -166,7 +166,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 Container(
                   margin: const EdgeInsets.only(left: 8),
                   decoration: BoxDecoration(
-                    color: Colors.purple[200], // light purple send button background
+                    color: Colors.purple[200], 
                     shape: BoxShape.circle,
                   ),
                   child: IconButton(
