@@ -46,10 +46,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
     final String formattedTotal = '₱${widget.totalAmount.toStringAsFixed(2)}';
 
     return Scaffold(
-      backgroundColor: Colors.purple[50], // light purple background
+      backgroundColor: Colors.purple[50], 
       appBar: AppBar(
         title: const Text('Confirm Payment'),
-        backgroundColor: Colors.purple[300], // light purple AppBar
+        backgroundColor: Colors.purple[300], 
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -65,7 +65,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
               style: const TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
-                color: Colors.purple, // light purple text
+                color: Colors.purple, 
               ),
             ),
             const SizedBox(height: 24),
@@ -103,7 +103,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 16),
-                backgroundColor: Colors.purple[300], // light purple button
+                backgroundColor: Colors.purple[300], 
               ),
               onPressed: _isLoading ? null : _processPayment,
               child: _isLoading
