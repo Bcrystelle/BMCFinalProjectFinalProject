@@ -8,10 +8,10 @@ class AdminChatListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.purple[50], // light purple background
+      backgroundColor: Colors.purple[50], 
       appBar: AppBar(
         title: const Text('Active Chats'),
-        backgroundColor: Colors.purple[300], // light purple AppBar
+        backgroundColor: Colors.purple[300], 
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
@@ -44,7 +44,7 @@ class AdminChatListScreen extends StatelessWidget {
               final int unreadCount = chatData['unreadByAdminCount'] ?? 0;
 
               return ListTile(
-                tileColor: Colors.purple[100], // light purple ListTile
+                tileColor: Colors.purple[100], 
                 leading: const Icon(Icons.person, color: Colors.purple),
                 title: Text(
                   userEmail,
