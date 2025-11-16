@@ -33,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
-      // ✅ AuthWrapper will handle navigation
+      
     } on FirebaseAuthException catch (e) {
       String message = 'An error occurred';
       if (e.code == 'user-not-found') message = 'No user found for that email.';
@@ -50,10 +50,10 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.purple[50], // light purple background
+      backgroundColor: Colors.purple[50], 
       appBar: AppBar(
         title: const Text('Login'),
-        backgroundColor: Colors.purple[300], // light purple AppBar
+        backgroundColor: Colors.purple[300],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -69,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     labelText: 'Email',
                     border: const OutlineInputBorder(),
                     filled: true,
-                    fillColor: Colors.purple[100], // light purple field
+                    fillColor: Colors.purple[100], 
                   ),
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
@@ -86,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     labelText: 'Password',
                     border: const OutlineInputBorder(),
                     filled: true,
-                    fillColor: Colors.purple[100], // light purple field
+                    fillColor: Colors.purple[100], 
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) return 'Enter password';
@@ -99,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   onPressed: _isLoading ? null : _login,
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size.fromHeight(50),
-                    backgroundColor: Colors.purple[300], // light purple button
+                    backgroundColor: Colors.purple[300], 
                   ),
                   child: _isLoading
                       ? const CircularProgressIndicator(
@@ -114,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                   child: const Text(
                     "Don't have an account? Sign Up",
-                    style: TextStyle(color: Colors.purple), // light purple text
+                    style: TextStyle(color: Colors.purple), 
                   ),
                 )
               ],
