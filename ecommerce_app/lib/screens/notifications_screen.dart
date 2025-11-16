@@ -29,16 +29,16 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.purple[50], // light purple background
+      backgroundColor: Colors.purple[50], 
       appBar: AppBar(
         title: const Text('Notifications'),
-        backgroundColor: Colors.purple[300], // light purple AppBar
+        backgroundColor: Colors.purple[300], 
       ),
       body: _user == null
           ? const Center(
               child: Text(
                 'Please log in.',
-                style: TextStyle(color: Colors.purple), // light purple text
+                style: TextStyle(color: Colors.purple), 
               ),
             )
           : StreamBuilder<QuerySnapshot>(
@@ -51,7 +51,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(
                     child: CircularProgressIndicator(
-                      color: Colors.purple, // light purple spinner
+                      color: Colors.purple, 
                     ),
                   );
                 }
@@ -59,7 +59,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                   return const Center(
                     child: Text(
                       'You have no notifications.',
-                      style: TextStyle(color: Colors.purple), // light purple text
+                      style: TextStyle(color: Colors.purple), 
                     ),
                   );
                 }
@@ -80,7 +80,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
 
                     return ListTile(
                       leading: wasUnread
-                          ? const Icon(Icons.circle, color: Colors.purple, size: 12) // purple for unread
+                          ? const Icon(Icons.circle, color: Colors.purple, size: 12)
                           : const Icon(Icons.circle_outlined, color: Colors.grey, size: 12),
                       title: Text(
                         data['title'] ?? 'No Title',
