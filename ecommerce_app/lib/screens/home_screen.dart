@@ -66,16 +66,16 @@ class _HomeScreenState extends State<HomeScreen> {
     if (_currentUser == null) return const LoginScreen();
 
     return Scaffold(
-      backgroundColor: Colors.purple[50], // light purple background
+      backgroundColor: Colors.purple[50], 
       appBar: AppBar(
         title: Image.asset(
           'assets/images/app_logo.png',
           height: 40,
         ),
         centerTitle: true,
-        backgroundColor: Colors.purple[300], // light purple AppBar
+        backgroundColor: Colors.purple[300], 
         actions: [
-          // 🛒 Cart Icon with Badge
+          
           Consumer<CartProvider>(
             builder: (context, cart, child) {
               return Badge(
@@ -94,10 +94,10 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ),
 
-          // 🔔 Notification Icon
+          
           const NotificationIcon(),
 
-          // 📜 Order History
+          
           IconButton(
             icon: const Icon(Icons.receipt_long),
             tooltip: 'My Orders',
@@ -106,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
 
-          // 🛠️ Admin Panel (only for admin users)
+          
           if (_userRole == 'admin')
             IconButton(
               icon: const Icon(Icons.admin_panel_settings),
@@ -116,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
 
-          // 👤 Profile
+          
           IconButton(
             icon: const Icon(Icons.person_outline),
             tooltip: 'Profile',
@@ -127,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
 
-      // 🛍️ Product Grid
+      
       body: StreamBuilder<QuerySnapshot>(
         stream: _firestore
             .collection('products')
@@ -137,7 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: CircularProgressIndicator(
-                color: Colors.purple, // light purple spinner
+                color: Colors.purple, 
               ),
             );
           }
@@ -186,7 +186,7 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
 
-      // 💬 Floating Action Button for users to contact admin
+      
       floatingActionButton: _userRole == 'user'
           ? StreamBuilder<DocumentSnapshot>(
               stream: _firestore
@@ -203,7 +203,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   label: Text('$unreadCount'),
                   isLabelVisible: unreadCount > 0,
                   child: FloatingActionButton.extended(
-                    backgroundColor: Colors.purple[200], // light purple FAB
+                    backgroundColor: Colors.purple[200], 
                     foregroundColor: Colors.white,
                     icon: const Icon(Icons.support_agent),
                     label: const Text('Contact Admin'),
