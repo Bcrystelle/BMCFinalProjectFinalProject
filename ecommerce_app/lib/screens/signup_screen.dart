@@ -50,7 +50,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: const Text('Account created successfully!'),
-            backgroundColor: Colors.purple[200], // light purple
+            backgroundColor: Colors.purple[200],
           ),
         );
 
@@ -85,10 +85,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.purple[50], // light purple background
+      backgroundColor: Colors.purple[50], 
       appBar: AppBar(
         title: const Text('Sign Up'),
-        backgroundColor: Colors.purple[300], // light purple AppBar
+        backgroundColor: Colors.purple[300], 
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -133,7 +133,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ElevatedButton(
                 onPressed: _isLoading ? null : _signUp,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.purple[300], // light purple button
+                  backgroundColor: Colors.purple[300], 
                   minimumSize: const Size(double.infinity, 50),
                 ),
                 child: _isLoading
