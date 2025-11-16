@@ -58,7 +58,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: const Text('Password changed successfully!'),
-          backgroundColor: Colors.purple[200], // light purple
+          backgroundColor: Colors.purple[200], 
         ),
       );
 
@@ -95,10 +95,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
 
     return Scaffold(
-      backgroundColor: Colors.purple[50], // light purple background
+      backgroundColor: Colors.purple[50], 
       appBar: AppBar(
         title: const Text('Profile'),
-        backgroundColor: Colors.purple[300], // light purple AppBar
+        backgroundColor: Colors.purple[300], 
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -153,7 +153,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             const SizedBox(height: 24),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.purple[300], // light purple button
+                backgroundColor: Colors.purple[300], 
                 padding: const EdgeInsets.symmetric(vertical: 16),
               ),
               onPressed: _isLoading ? null : _changePassword,
