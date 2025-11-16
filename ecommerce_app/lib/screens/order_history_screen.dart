@@ -11,16 +11,16 @@ class OrderHistoryScreen extends StatelessWidget {
     final User? user = FirebaseAuth.instance.currentUser;
 
     return Scaffold(
-      backgroundColor: Colors.purple[50], // light purple background
+      backgroundColor: Colors.purple[50], 
       appBar: AppBar(
         title: const Text('My Orders'),
-        backgroundColor: Colors.purple[300], // light purple AppBar
+        backgroundColor: Colors.purple[300], 
       ),
       body: user == null
           ? const Center(
               child: Text(
                 'Please log in to see your orders.',
-                style: TextStyle(color: Colors.purple), // light purple text
+                style: TextStyle(color: Colors.purple), 
               ),
             )
           : StreamBuilder<QuerySnapshot>(
