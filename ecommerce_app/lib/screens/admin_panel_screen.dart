@@ -51,10 +51,10 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.purple[50], // light purple background
+      backgroundColor: Colors.purple[50], 
       appBar: AppBar(
         title: const Text('Admin Panel'),
-        backgroundColor: Colors.purple[300], // light purple AppBar
+        backgroundColor: Colors.purple[300], 
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -66,7 +66,7 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
                 icon: const Icon(Icons.list_alt),
                 label: const Text('Manage All Orders'),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.purple[200], // light purple button
+                  backgroundColor: Colors.purple[200], 
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   textStyle: const TextStyle(fontSize: 16),
@@ -82,7 +82,7 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
                 icon: const Icon(Icons.chat_bubble_outline),
                 label: const Text('View User Chats'),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.purple[200], // light purple button
+                  backgroundColor: Colors.purple[200], 
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   textStyle: const TextStyle(fontSize: 16),
@@ -110,7 +110,7 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
                       decoration: InputDecoration(
                         labelText: 'Product Name',
                         filled: true,
-                        fillColor: Colors.purple[100], // light purple field
+                        fillColor: Colors.purple[100], 
                       ),
                       validator: (value) =>
                           value!.isEmpty ? 'Enter a product name' : null,
@@ -120,7 +120,7 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
                       decoration: InputDecoration(
                         labelText: 'Product Description',
                         filled: true,
-                        fillColor: Colors.purple[100], // light purple field
+                        fillColor: Colors.purple[100], 
                       ),
                     ),
                     TextFormField(
@@ -128,7 +128,7 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
                       decoration: InputDecoration(
                         labelText: 'Price',
                         filled: true,
-                        fillColor: Colors.purple[100], // light purple field
+                        fillColor: Colors.purple[100], 
                       ),
                       keyboardType: TextInputType.number,
                       validator: (value) =>
@@ -139,7 +139,7 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
                       decoration: InputDecoration(
                         labelText: 'Image URL',
                         filled: true,
-                        fillColor: Colors.purple[100], // light purple field
+                        fillColor: Colors.purple[100], 
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -148,7 +148,7 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
                         : ElevatedButton(
                             onPressed: _uploadProduct,
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.purple[200], // light purple button
+                              backgroundColor: Colors.purple[200], 
                               foregroundColor: Colors.white,
                               padding: const EdgeInsets.symmetric(vertical: 16),
                             ),
