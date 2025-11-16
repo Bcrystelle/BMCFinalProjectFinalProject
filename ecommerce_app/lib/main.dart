@@ -8,12 +8,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-// --- APP COLOR PALETTE (Coffee Shop Theme) ---
-const Color kRichBlack = Color(0xFF1D1F24); // Dark rich black
-const Color kBrown = Color(0xFF8B5E3C); // Main "coffee" brown
-const Color kLightBrown = Color(0xFFD2B48C); // Lighter tan/beige
-const Color kOffWhite = Color(0xFFF8F4F0); // Warm off-white background
-// --- END OF COLOR PALETTE ---
+
+const Color kRichBlack = Color(0xFF1D1F24); 
+const Color kBrown = Color(0xFF8B5E3C); 
+const Color kLightBrown = Color(0xFFD2B48C); 
+const Color kOffWhite = Color(0xFFF8F4F0); 
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'eCommerce App',
 
-      // --- COMPLETE GLOBAL THEME ---
+     
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: kBrown,
@@ -77,7 +77,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
 
-        // ✅ Updated for Flutter 3.35+ (CardTheme → CardThemeData)
+       
         cardTheme: const CardThemeData(
           elevation: 1,
           color: Colors.white,
@@ -94,7 +94,7 @@ class MyApp extends StatelessWidget {
           centerTitle: true,
         ),
       ),
-      // --- END OF THEME ---
+      
 
       home: const AuthWrapper(),
     );
