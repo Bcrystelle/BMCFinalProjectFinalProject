@@ -11,10 +11,10 @@ class CartScreen extends StatelessWidget {
     final cart = Provider.of<CartProvider>(context);
 
     return Scaffold(
-      backgroundColor: Colors.purple[50], // light purple background
+      backgroundColor: Colors.purple[50], 
       appBar: AppBar(
         title: const Text('Your Cart'),
-        backgroundColor: Colors.purple[300], // light purple AppBar
+        backgroundColor: Colors.purple[300], 
       ),
       body: Column(
         children: [
@@ -27,11 +27,11 @@ class CartScreen extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final cartItem = cart.items[index];
                       return Card(
-                        color: Colors.purple[100], // light purple card for each item
+                        color: Colors.purple[100], 
                         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                         child: ListTile(
                           leading: CircleAvatar(
-                            backgroundColor: Colors.purple[200], // light purple avatar
+                            backgroundColor: Colors.purple[200], 
                             child: Text(cartItem.name[0],
                                 style: const TextStyle(color: Colors.white)),
                           ),
@@ -59,7 +59,7 @@ class CartScreen extends StatelessWidget {
                   ),
           ),
           Card(
-            color: Colors.purple[100], // light purple summary card
+            color: Colors.purple[100], 
             margin: const EdgeInsets.all(16),
             child: Padding(
               padding: const EdgeInsets.all(16),
@@ -107,7 +107,7 @@ class CartScreen extends StatelessWidget {
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size.fromHeight(50),
-                backgroundColor: Colors.purple[200], // light purple button
+                backgroundColor: Colors.purple[200], 
                 foregroundColor: Colors.white,
               ),
               onPressed: cart.items.isEmpty
