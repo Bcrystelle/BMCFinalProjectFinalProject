@@ -43,15 +43,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     final cart = Provider.of<CartProvider>(context, listen: false);
 
     return Scaffold(
-      backgroundColor: Colors.purple[50], // light purple background
+      backgroundColor: Colors.purple[50], 
       appBar: AppBar(
         title: Text(name),
-        backgroundColor: Colors.purple[300], // light purple AppBar
+        backgroundColor: Colors.purple[300], /
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Product Image
+            
             Image.network(
               imageUrl,
               height: 300,
@@ -69,7 +69,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               },
             ),
 
-            // Product Details
+            
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -87,7 +87,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     '₱${price.toStringAsFixed(2)}',
                     style: const TextStyle(
                       fontSize: 20,
-                      color: Colors.purple, // light purple price
+                      color: Colors.purple, 
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -101,7 +101,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   ),
                   const SizedBox(height: 20),
 
-                  // Quantity Controls
+                  
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -128,7 +128,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
                   const SizedBox(height: 20),
 
-                  // Add to Cart Button
+                  
                   ElevatedButton.icon(
                     onPressed: () {
                       cart.addItem(
@@ -142,14 +142,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         SnackBar(
                           content: Text('Added $_quantity × $name to cart!'),
                           duration: const Duration(seconds: 2),
-                          backgroundColor: Colors.purple[200], // light purple snackbar
+                          backgroundColor: Colors.purple[200], 
                         ),
                       );
                     },
                     icon: const Icon(Icons.shopping_cart_outlined, color: Colors.white),
                     label: const Text('Add to Cart'),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.purple[300], // light purple button
+                      backgroundColor: Colors.purple[300], 
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       textStyle: const TextStyle(
                         fontSize: 18,
