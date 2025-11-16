@@ -45,7 +45,7 @@ class _AdminOrderScreenState extends State<AdminOrderScreen> {
       builder: (dialogContext) {
         const statuses = ['Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled'];
         return AlertDialog(
-          backgroundColor: Colors.purple[50], // light purple dialog background
+          backgroundColor: Colors.purple[50], 
           title: const Text('Update Order Status'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
@@ -74,10 +74,10 @@ class _AdminOrderScreenState extends State<AdminOrderScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.purple[50], // light purple background
+      backgroundColor: Colors.purple[50], 
       appBar: AppBar(
         title: const Text('Manage Orders'),
-        backgroundColor: Colors.purple[300], // light purple AppBar
+        backgroundColor: Colors.purple[300],
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: _firestore.collection('orders').orderBy('createdAt', descending: true).snapshots(),
@@ -112,7 +112,7 @@ class _AdminOrderScreenState extends State<AdminOrderScreen> {
               final String formattedTotal = '₱${totalPrice.toStringAsFixed(2)}';
 
               return Card(
-                color: Colors.purple[100], // light purple card
+                color: Colors.purple[100], 
                 margin: const EdgeInsets.all(8.0),
                 child: ListTile(
                   title: Text(
